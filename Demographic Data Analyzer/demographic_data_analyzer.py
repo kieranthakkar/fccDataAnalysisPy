@@ -6,13 +6,13 @@ def calculate_demographic_data(print_data=True):
     df = pd.read_csv("adult.data.csv")
 
     # How many of each race are represented in this dataset? This should be a Pandas series with race names as the index labels.
-    race_count = None
+    race_count = df["race"].value_counts()
 
     # What is the average age of men?
-    average_age_men = None
+    average_age_men = df[df["sex"] == "Male"]["age"].mean()
 
     # What is the percentage of people who have a Bachelor's degree?
-    percentage_bachelors = None
+    percentage_bachelors = 100*df[df["education"] == "Bachelors"].shape[0]/df.shape[0]
 
     # What percentage of people with advanced education (`Bachelors`, `Masters`, or `Doctorate`) make more than 50K?
     # What percentage of people without advanced education make more than 50K?
