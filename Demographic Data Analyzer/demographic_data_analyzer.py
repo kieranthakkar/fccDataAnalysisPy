@@ -36,11 +36,19 @@ def calculate_demographic_data(print_data=True):
     rich_percentage = round(100*minWorkers[minWorkers["salary"] == ">50K"].shape[0]/num_min_workers,1)
 
     # What country has the highest percentage of people that earn >50K?
-    highest_earning_country = None
-    highest_earning_country_percentage = None
+    countryCount = df["native-country"].value_counts() # how many people from each country
+    countryRich = df[df["salary"] == ">50K"]["native-country"].value_counts() # how many rich from each country
+    richPercent = round(100*countryRich/countryCount,1)
+
+    highest_earning_country = richPercent.idxmax()
+    highest_earning_country_percentage = richPercent.max()
 
     # Identify the most popular occupation for those who earn >50K in India.
-    top_IN_occupation = None
+    indianCount = df[df["native-country"] == "India"] # 1 DONE
+    richIndians = indianCount[indianCount["salary"] == ">50K"]
+    groupedIndians = richIndians.groupby("occupation")["occupation"].count()
+
+    top_IN_occupation = groupedIndians.idxmax()
 
     # DO NOT MODIFY BELOW THIS LINE
 
