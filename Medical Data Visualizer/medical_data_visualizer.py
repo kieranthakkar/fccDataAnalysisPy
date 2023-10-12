@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Import data
-df = pd.read_csv("Medical Data Visualizer\medical_examination.csv")
+df = pd.read_csv("medical_examination.csv")
 
 # Add 'overweight' column
 #To determine if a person is overweight, first calculate their BMI by dividing their weight in kilograms by the square of their height in meters. If that value is > 25 then the person is overweight. Use the value 0 for NOT overweight and the value 1 for overweight.
@@ -18,21 +18,14 @@ df["gluc"] = df["gluc"].apply(lambda x : 1 if x > 1 else 0)
 # Draw Categorical Plot
 def draw_cat_plot():
     # Create DataFrame for cat plot using `pd.melt` using just the values from 'cholesterol', 'gluc', 'smoke', 'alco', 'active', and 'overweight'.
-    df_cat = pd.melt(df, id_vars = ..., value_vars = ... , var_name = ..., value_name = ... , ignore_index = ...)
-
+    df_cat = pd.melt(df, id_vars=["cardio"], value_vars=['cholesterol', 'gluc', 'smoke', 'alco', 'active', 'overweight'])
 
     # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the columns for the catplot to work correctly.
-    df_cat = None
-    
 
     # Draw the catplot with 'sns.catplot()'
-
-
-
     # Get the figure for the output
-    fig = None
-
-
+    fig = sns.catplot(data=df_cat, x="variable", kind="count", col="cardio",hue="value")
+    
     # Do not modify the next two lines
     fig.savefig('catplot.png')
     return fig
