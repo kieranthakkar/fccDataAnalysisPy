@@ -42,18 +42,16 @@ def draw_heat_map():
     (df['ap_lo'] <= df['ap_hi'])] 
 
     # Calculate the correlation matrix
-    corr = None
+    corr = df_heat.corr(numeric_only=True)
 
     # Generate a mask for the upper triangle
-    mask = None
-
-
+    mask = np.triu(corr)
 
     # Set up the matplotlib figure
     fig, ax = None
 
     # Draw the heatmap with 'sns.heatmap()'
-
+    sns.heatmap(corr, annot=True, mask=mask)
 
 
     # Do not modify the next two lines
