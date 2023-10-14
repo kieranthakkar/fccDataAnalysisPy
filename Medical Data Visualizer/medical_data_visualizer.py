@@ -48,11 +48,10 @@ def draw_heat_map():
     mask = np.triu(corr)
 
     # Set up the matplotlib figure
-    fig, ax = None
+    fig = plt.figure(figsize=(12,10))
 
     # Draw the heatmap with 'sns.heatmap()'
-    sns.heatmap(corr, annot=True, mask=mask)
-
+    sns.heatmap(corr, annot=True, mask=mask, fmt=".1f", linewidths=1)
 
     # Do not modify the next two lines
     fig.savefig('heatmap.png')
